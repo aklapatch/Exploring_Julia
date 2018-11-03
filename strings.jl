@@ -44,3 +44,9 @@ println(str)
 str = string("this ", "is ", "another ", "test")
 println(str)
 
+#string literal
+str = """ using triple quotes
+can give you    
+a string     literal """
+println(str)
+
