@@ -13,9 +13,11 @@ So far I am just playing with the language and following the beginners documenta
 
  + Perl's print and string syntax
 
-![alt text](https://github.com/aklapatch/explore-julia/blob/master/images/perCodeExample.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/perCodeExample.png)
 
-![alt text](https://github.com/aklapatch/explore-julia/blob/master/images/perlCodeResult.png)
+Result:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/perlCodeResult.png)
 
 ### Notes so far
 
