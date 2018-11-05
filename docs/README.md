@@ -20,6 +20,8 @@ first="One small step for man"
 last="One giant leap for mankind"
 println("$first\n$last")
 ```
+Code Result:
+
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/perlCodeResult.png)
 
  + Python's command line functionality
