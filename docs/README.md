@@ -7,12 +7,23 @@ Exploration of the Julia language for CSCI 355
 
 So far I am just playing with the language and following the beginners documentation to see what some of the language features are.
 
-### Language features
+### Language features so far
 
  + Package manager
 
+ + Perl's print and string syntax
 
-### Notes
+![alt text](https://github.com/aklapatch/explore-julia/images/perCodeExample.png)
+
+![alt text](https://github.com/aklapatch/explore-julia/images/perlCodeResult.png)
+
+
+
+### Notes so far
+
+ + 
+
+
 
 
 
