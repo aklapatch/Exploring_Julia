@@ -11,7 +11,7 @@ So far I am playing with the language and following the beginner's documentation
 
  + Package manager
 
- + Rust like build system
+ + Build system
 
  + Perl's print substitution
 
