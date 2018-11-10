@@ -50,3 +50,7 @@ can give you
 a string     literal """
 println(str)
 
+first="One small step for man"
+last ="One giant leap for mankind"
+println("$first\n$last")
+
