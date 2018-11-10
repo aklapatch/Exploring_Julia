@@ -1,0 +1,6 @@
+authors = ["aklapatc "]
+name = "TestPkg"
+uuid = "cbda91d0-e491-11e8-3aa1-e1996b19fdd0"
+version = "0.1.0"
+
+[deps]
