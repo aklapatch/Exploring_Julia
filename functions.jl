@@ -48,8 +48,24 @@ println("x = ",x," y = ",y)
 tupl(y,z,arg...) = (y, z, arg)
 println("tupl of 4 5 2 3 1 3 4 = ",tupl(4, 5, 2, 3, 1, 3, 4))
 
-# specify data type
+# specify default
 function test(x,y,z=3)
     3*x - 1*y +z
 end
 println("test(1,1)=",test(1,1))
+
+# specify input data
+ftest(y::Float64, z::Int) = y*z
+println("float input ",ftest(1.565746,2))
+
+#abstract specification
+Ntest(y::Number, z::Number) = y*z
+println("Number input ",Ntest(1.565746,2))
+
+#implement overloading
+type(x::T, y::T) where {T} = true
+type(x,y)=false
+
+type(x::T,y::T) where {T<:Number} = true
+type(x::Number, y::Number) = false
+
