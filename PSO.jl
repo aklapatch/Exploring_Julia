@@ -21,6 +21,7 @@ fitness(x) = -(x-3)^2
 for i in 1:1:100
     global bestfit  # YOU HAVE TO DO THAT
     global bestpos  # WHY?
+
     for j in 1:1:100
 
         # evaluate fitness
@@ -32,6 +33,7 @@ for i in 1:1:100
         end
 
         if(part_arr[j].fitness > bestfit)
+
             bestfit = part_arr[j].fitness
             bestpos = part_arr[j].pos
         end
