@@ -32,18 +32,18 @@ Code Result:
 
 Parsing a string into a expression:
   
-![alt text](../images/juliaMetaProg.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaMetaProg.png)
 
 Constructing an expression:
-![alt text](../images/juliaAssignExpr.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaAssignExpr.png)
 
 + External program execution, manipulation and interoperability:
 
-![alt text](../images/juliaExtProg.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtProg.png)
 
 + Bash style variable interpolation:
 
-![alt text](../images/juliaExtVars.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtVars.png)
 
 
 
