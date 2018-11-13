@@ -35,6 +35,7 @@ Parsing a string into a expression:
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaMetaProg.png)
 
 Constructing an expression:
+
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaAssignExpr.png)
 
 + External program execution, manipulation and interoperability:
