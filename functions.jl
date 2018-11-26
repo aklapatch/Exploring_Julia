@@ -1,21 +1,17 @@
 function g(x)
-    2*x
+    2*x - x^3
 end
-# print result
-number = g(2)
-println("g(2)=",number)
 
-# functions are values
 f(y) = y^3
 
-println("f(3)=",f(3))
+#specify types
+function area(r::Int)::Float16
+    return (r^2)*3.14159
+ end
+ 
 
-#specify return type
-function h(three)::Float16
-    three * 42
-    three / 6
-end
-println("h(7)=",h(7))
+
+println("h(2)=",h(2))
 
 #operators are functions
 println("+(7,8,3)=",+(7,8,3))
@@ -68,4 +64,3 @@ type(x,y)=false
 
 type(x::T,y::T) where {T<:Number} = true
 type(x::Number, y::Number) = false
-
