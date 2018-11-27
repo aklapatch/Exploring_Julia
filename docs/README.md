@@ -44,7 +44,7 @@ Constructing an expression:
 
 + Bash style variable interpolation:
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatSyntax.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtVars.png)
 
  + Some matlab syntax (Julia's arrays start at one)
 
@@ -57,6 +57,8 @@ end
 array = "Now this is not the end. It is not even the beginning of the end."
 println(array[26:end])
 ```
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatSyntax.png)
 
 ## Train of thought
 
