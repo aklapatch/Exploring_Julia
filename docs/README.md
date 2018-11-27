@@ -159,5 +159,5 @@ immutable struct example
 end
 ```
 
-References: 
-    https://docs.julialang.org/en/v1/
+References:
+    <https://docs.julialang.org/en/v1/>
