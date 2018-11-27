@@ -91,6 +91,15 @@ So far I have two examples of that. One of them is the defalut immutable struct,
 
 ## Gripes and Nitpicks
 
+### Documentation
+
+The docs are not entirely accurate. For example, this page suggests that the matlab `tr`, `eigvals`, and `eigvecs` functions work, but I get the following message when calling them.
+
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/BadDocs.png)
+
+The language is changing rapidly enough so that the docs have a hard time keeping up. Despite the 1.0 release.
+
 #### Scope specification
 
 The scope in julia has a unique mechanic involved in it. This design choice can be good for clarity, but it only if you know what it means. Here is an example.

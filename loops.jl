@@ -1,4 +1,4 @@
-for num in 0:20: 200
+for num in 0:20:200
     println(num)
 end
 
