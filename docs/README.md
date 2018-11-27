@@ -11,7 +11,7 @@ So far I am playing with the language and following the beginner's documentation
 
  + Package manager
 
- + Build system
+ + Build system (for packages)
 
  + Perl's print substitution
 
@@ -44,9 +44,19 @@ Constructing an expression:
 
 + Bash style variable interpolation:
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtVars.png)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatSyntax.png)
 
+ + Some matlab syntax (Julia's arrays start at one)
 
+```julia
+for i in 2:2:100
+    array[i] = array[i-1] + array[i]
+end
+
+# Churchill quote
+array = "Now this is not the end. It is not even the beginning of the end."
+println(array[26:end])
+```
 
 ## Train of thought
 
@@ -148,3 +158,5 @@ immutable struct example
 end
 ```
 
+References: 
+ + https://docs.julialang.org/en/v1/

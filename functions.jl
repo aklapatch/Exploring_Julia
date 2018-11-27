@@ -9,8 +9,6 @@ function area(r::Int)::Float16
     return (r^2)*3.14159
  end
  
-
-
 println("h(2)=",h(2))
 
 #operators are functions
