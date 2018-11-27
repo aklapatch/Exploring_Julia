@@ -93,7 +93,7 @@ So far I have two examples of that. One of them is the defalut immutable struct,
 
 ### Documentation
 
-The docs are not entirely accurate. For example, this page suggests that the matlab `tr`, `eigvals`, and `eigvecs` functions work, but I get the following message when calling them.
+The docs are not entirely accurate. For example, this page ([Julia linear algebra documentation](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Linear-Algebra-1)) suggests that the matlab `tr`, `eigvals`, and `eigvecs` functions work, but I get the following message when calling them.
 
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/BadDocs.png)
