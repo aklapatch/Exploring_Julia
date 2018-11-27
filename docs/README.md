@@ -3,10 +3,6 @@ An exploration of the Julia programming language for CSCI 355
 
 [Full Proposal](https://drive.google.com/open?id=1zAACVJXP2G_ECGt8eHKT_1zGMPDgzC5JwPi9xr1OOBM)
 
-## Progress
-
-So far I am playing with the language and following the beginner's documentation to get some knowlegde of the language and its features.
-
 ### Language features so far
 
  + Package manager
@@ -90,6 +86,12 @@ The problem arises when Julia tries to buck the conventions of the languages tha
 So far I have two examples of that. One of them is the defalut immutable struct, and the other is having to re-declare a global variable inside a local scope to acess that variable. While these might seem like minor nuances, they indicate that the Julia team is willing to depart from convention in ways that might not be helpful.
 
 ## Gripes and Nitpicks
+
+### Bugs
+
+Windows commands are not working. My guess is that Julia does not read the Windows PATH environment variable.
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/CommandError.PNG)
 
 ### Documentation
 
