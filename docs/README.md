@@ -46,19 +46,18 @@ Constructing an expression:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtVars.png)
 
- + Some matlab syntax (Julia's arrays start at one)
+ + Some matlab syntax and functions (Julia's arrays start at one)
 
 ```julia
 for i in 2:2:100
     array[i] = array[i-1] + array[i]
 end
-
-# Churchill quote
-array = "Now this is not the end. It is not even the beginning of the end."
-println(array[26:end])
 ```
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatSyntax.png)
+
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatFunc.png)
 
 ## Train of thought
 
