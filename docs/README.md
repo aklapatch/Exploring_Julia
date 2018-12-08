@@ -43,7 +43,33 @@ Even though:
 
 ### Multiple Dispatch
 
-In few words, multiple dispatch is runtime function overloading. It selects a function based on the specified type. It will select the function based on the most concrete type. It will not match subtypes with their supertype either, as you saw.
+In few words, multiple dispatch is runtime function overloading.
+
+In more words, it selects a function at runtime based on the specified types. It will select the function based on the most concrete type. If you specify a supertype, it will accept all suptypes of that supertype.
+
+```julia
+function test(y::Real)
+    if (y>20)
+        return 1
+    else
+        return 0
+    end
+end
+
+function main()
+    t::Float32 = 34.34234
+    x::Float64 = 34.34234
+    
+    println("val= ",test(t))
+    println("val= ",test(x))
+end
+
+main()
+```
+
+Running that yields this result:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subSuperType.PNG)
 
 ## Language features
 
@@ -56,7 +82,7 @@ In few words, multiple dispatch is runtime function overloading. It selects a fu
 ```julia
 first="One small step for man"
 last="One giant leap for mankind"
-println("$first\n$last") 
+println("$first\n$last")
 ```
 
 Code Result:
@@ -104,7 +130,7 @@ Julia's heritage of other languages leads to a interesting side effect. Juila ex
 All of the following methods are equivalent.
 
 ```julia
-abs(x) = (x^2)^1/2; 
+abs(x) = (x^2)^1/2;
 ```
 
 ```julia
