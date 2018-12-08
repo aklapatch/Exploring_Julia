@@ -187,7 +187,7 @@ for i in 1:1:100
         if(stuff[j] > bestfit)
             bestfit = stuff[j];
         end
-    end   
+    end
 
     # do the rest of your stuff
 end
@@ -205,8 +205,7 @@ looks like a variable declaration. This could be confusing and decreases readabi
 In my opinion, there is a universal, better solution. One could use descriptive variable names.
 ```julia
 global_var_name = value
-``` 
-
+```
 This is a glaring issue because other languages do not have this "feature" and are fine without it. Julia could be made simpler without a significant consequence by omitting this feature.
 
 #### Mutable structs
