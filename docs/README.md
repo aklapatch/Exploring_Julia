@@ -15,6 +15,8 @@ primitive type Bool <: Integer 8 end
 
 Julia also allows subtyping checks to evaluate to Bool values.
 
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
+
 ### Subtyping applied
 
 Julia can uses this subtyping concept in its equivalent of C++ templates.
@@ -23,15 +25,23 @@ Julia can uses this subtyping concept in its equivalent of C++ templates.
 struct Vehicle{T}
     Type::T
     weight::Float64
-    horsepower::Int
     engine::String
     gun::String
 end
 ```
+One can check the subtyping of this struct as such:
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subtypeStruct.PNG)
 
-### Language features so far
+Julia uses multiple dispatch, so it does not consider any concrete type to be a subtype of another concrete type.
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/concreteSubtype.PNG)
+
+### Multiple Dispatch
+
+
+
+## Language features
 
 + Package manager
 
