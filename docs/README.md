@@ -14,8 +14,9 @@ An exploration of the Julia programming language for CSCI 355
 ```julia
 first="One small step for man"
 last="One giant leap for mankind"
-println("$first\n$last")
+println("$first\n$last") 
 ```
+
 Code Result:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/perlCodeResult.png)
@@ -52,7 +53,6 @@ end
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatSyntax.png)
 
-
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatFunc.png)
 
 ## Train of thought
@@ -87,20 +87,21 @@ So far I have two examples of that. One of them is the defalut immutable struct,
 
 ## Gripes and Nitpicks
 
-### Bugs
+### Incomplete support
 
-Windows commands are not working. My guess is that Julia does not read the Windows PATH environment variable.
+The language does not universally support all of its features across all cases or scenarios.
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/CommandError.PNG)
+One example is global variable typing.
 
-### Documentation
+```julia
+global_var::Float32 = 34.5134
+```
 
-The docs are not entirely accurate. For example, this page ([Julia linear algebra documentation](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/#Linear-Algebra-1)) suggests that the matlab `tr`, `eigvals`, and `eigvecs` functions work, but I get the following message when calling them.
+This results in:
 
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/typingGlobalVars.png)
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/BadDocs.png)
-
-The language is changing rapidly enough so that the docs have a hard time keeping up. Despite the 1.0 release.
+### "Features"
 
 #### Scope specification
 
