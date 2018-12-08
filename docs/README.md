@@ -8,11 +8,26 @@ An exploration of the Julia programming language for CSCI 355
 Julia is not an OO language. It does not support objects per say. However, there are some leftover traits from OO programming. The main evidence of this is the subtyping feature.
 
 One can declare a subtype of a primitive as such
+
 ```julia
 primitive type Bool <: Integer 8 end
 ```
 
 Julia also allows subtyping checks to evaluate to Bool values.
+
+### Subtyping applied
+
+Julia can uses this subtyping concept in its equivalent of C++ templates.
+
+```julia
+struct Vehicle{T}
+    Type::T
+    weight::Float64
+    horsepower::Int
+    engine::String
+    gun::String
+end
+```
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
 
