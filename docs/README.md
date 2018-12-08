@@ -3,13 +3,26 @@ An exploration of the Julia programming language for CSCI 355
 
 [Full Proposal](https://drive.google.com/open?id=1zAACVJXP2G_ECGt8eHKT_1zGMPDgzC5JwPi9xr1OOBM)
 
+## The Julia paradigm
+
+Julia is not an OO language. It does not support objects per say. However, there are some leftover traits from OO programming. The main evidence of this is the subtyping feature.
+
+One can declare a subtype of a primitive as such
+```julia
+primitive type Bool <: Integer 8 end
+```
+
+Julia also allows subtyping checks to evaluate to Bool values.
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
+
 ### Language features so far
 
- + Package manager
++ Package manager
 
- + Build system (for packages)
++ Build system (for packages)
 
- + Perl's print substitution
++ Perl's print substitution
 
 ```julia
 first="One small step for man"
@@ -21,7 +34,7 @@ Code Result:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/perlCodeResult.png)
 
- + Python's command line functionality
++ Python's command line functionality
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaCMDExample.png)
 
@@ -43,7 +56,7 @@ Constructing an expression:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaExtVars.png)
 
- + Some matlab syntax and functions (Julia's arrays start at one)
++ Some matlab syntax and functions (Julia's arrays start at one)
 
 ```julia
 for i in 2:2:100
