@@ -35,11 +35,15 @@ One can check the subtyping of this struct as such:
 
 Julia uses multiple dispatch, so it does not consider any concrete type to be a subtype of another concrete type.
 
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/concreteSubtype.PNG)
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/concreteSubtypes.PNG)
+
+Even though:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/FloatSubtype.PNG)
 
 ### Multiple Dispatch
 
-
+In few words, multiple dispatch is runtime function overloading. It selects a function based on the specified type. It will select the function based on the most concrete type. It will not match subtypes with their supertype either, as you saw.
 
 ## Language features
 
