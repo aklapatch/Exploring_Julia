@@ -71,6 +71,32 @@ Running that yields this result:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subSuperType.PNG)
 
+Here is a better demonstrator of the usefulness of mutiple dispatch. Say if you needed to process one datatype differently than another. Multiple dispatch will dispatch the function with the matching argument without having to rename a function or bind it to a unique object (like Java's String.parseInt).
+
+```julia
+max_val(var::Int32) = 2^31 -1
+
+max_val(var::Int16) = 2^15-1
+
+function main()
+    arg1::Int16 = 2
+    arg2::Int32 = 2
+
+    println("before max_val arg1 = $arg1 arg2= $arg2")
+
+    arg1 = max_val(arg1)
+    arg2 = max_val(arg2)
+
+    println("after max_val arg1 = $arg1 arg2= $arg2")
+end
+
+main()
+```
+
+
+
+
+
 ## Language features
 
 + Package manager
