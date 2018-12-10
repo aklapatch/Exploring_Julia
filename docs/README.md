@@ -9,11 +9,11 @@ An exploration of the Julia programming language for CSCI 355
 
 ## Static or Dynamic compliation?
 
-Julia is an interpreted language: compiled then run around the same time.
+Julia is an interpreted language: compiled then run around the same time. Because the Julia interpreter tries to optimize the code more than other scripting languages, initial compilation may take longer than other scripting languages.
 
 ### Compilation exceptions
 
-Julia code can be embedded in C code, linked to the julia library, and compiled with gcc. In addition, there is a Julia package called PackageCompiler that helps automate this process. However, when I tried this (on Windows with the mingw-w64 port of gcc), a simple hello world program program was over one hundred megabytes in size. Compilation also takes an unusually long time.
+Julia code can be embedded in C code, linked to the julia library, and compiled with gcc. In addition, there is a Julia package called [PackageCompiler](https://github.com/JuliaLang/PackageCompiler.jl) that helps automate this process. However, this process can take an unusually long time.
 
 ## Pass by Value?
 
@@ -65,7 +65,7 @@ function f(x,y)
 end
 ```
 
-In this example the first version of the function `f` will be called if the arguments are integers, and the second function will be called if the arguments are not an integer or an integer subtype, like a bool type.
+In this example the first version of the function `f` will be called if the arguments are integers, and the second function will be called if the arguments are not an integer or an integer subtype.
 
 ## Exception handling
 
@@ -83,6 +83,7 @@ Exceptions can be defined as such:
 ```julia
 struct SpecialException <: Exception end
 ```
+The `<:` symbol indicates a subtype. In this case it means that `SpecialException` is a subtype or type of Exception.
 
 Exceptions  are triggered by using the `throw` keyword:
 ```julia
@@ -99,19 +100,30 @@ catch
 
 finally
     # this executes whether or
-    # not an exception occurres
+    # not an exception occurrs
 end
 ```
 
 ## Memory management
 
-Memory is automatically managed, like most scripting languages.
+Memory is  managed automatically, like most scripting languages.
 
-## The Julia paradigm
+# The Julia paradigm
 
-Julia is not an OO language. It does not support objects per say. However, there are some leftover traits from OO programming. The main evidence of this is the subtyping feature.
+Julia is not an object oriented programming language. However, there are some leftover traits from the object oriented programming paradigm. The main evidence of this is Julia's subtyping and abstraction.
 
-One can declare a subtype of a primitive as such
+Julia's abstraction takes place through abstract types. For example:
+```julia
+abstract type Language end
+
+struct English <: Language end
+
+struct Spanish <: Language end
+```
+
+Now any function with
+
+One can declare a subtype of a primitive like this:
 
 ```julia
 primitive type Bool <: Integer 8 end
@@ -149,7 +161,7 @@ Even though:
 
 In few words, multiple dispatch is runtime function overloading.
 
-In more words, it selects a function at runtime based on the specified types. It will select the function based on the most concrete type. If you specify a supertype, it will accept all suptypes of that supertype.
+In more words, it selects a function at runtime based on the types of the arguments. If you specify a an argument as a supertype, it will accept all subtypes of that supertype.
 
 ```julia
 function test(y::Real)
@@ -183,14 +195,15 @@ The most common example of this is implementing functions that could, in an obje
 
 One possible situation that exemplifies this is simulating a person starting a car.
 
-In Julia that function could look like this.
+In Julia that function could look like this:
 ```julia
 function startCar(input_person::Person, input_car::Car)
-    start(input_car)
+    start!(input_car)
 end
 ```
 
 Following an object oriented programming style, Java in this case, would have a function prototype like this
+
 ```java
 public class Person {
 
@@ -199,34 +212,10 @@ public class Person {
     }
 }
 ```
+In Julia, functions cannot not bound to an object like Java or C++. The main disadvantage of that is the lack of access control (e.g. public and private functions) and inheritance. 
 
-While that may look all well and good, 
-
-
-```julia
-max_val(var::Int32) = 2^31 -1
-
-max_val(var::Int16) = 2^15-1
-
-function main()
-    arg1::Int16 = 2
-    arg2::Int32 = 2
-
-    println("before max_val arg1 = $arg1 arg2= $arg2")
-
-    arg1 = max_val(arg1)
-    arg2 = max_val(arg2)
-
-    println("after max_val arg1 = $arg1 arg2= $arg2")
-end
-
-main()
-```
-
-
-
-
-
+Multiple dispatch makes up for the inheritance deficiency by allowing the user to redefine fuctions with abstract arguments for more concrete types. This approach is simpler than object oriented programming since it does not have the additional behavior of objects stacked on top of structs and methods.
+ 
 ## Language features
 
 + Package manager
@@ -304,11 +293,6 @@ end
 ```julia
 function abs(x); (x^2)^(1/2); end
 ```
-
-The problem arises when Julia tries to buck the conventions of the languages that pulls features from. One example is that by default structs are immutable. A C programmer would not be used to that, and that would decrease writability for them since they have to make a transition to a new practice.
-
-So far I have two examples of that. One of them is the defalut immutable struct, and the other is having to re-declare a global variable inside a local scope to acess that variable. While these might seem like minor nuances, they indicate that the Julia team is willing to depart from convention in ways that might not be helpful.
-
 ## Gripes and Nitpicks
 
 ### Incomplete support
@@ -356,13 +340,7 @@ To access the global variables you declared earlier, you need to specify that th
 ```julia
 global bestfit
 ``` 
-looks like a variable declaration. This could be confusing and decreases readability if you do not know what it is. 
-
-In my opinion, there is a universal, better solution. One could use descriptive variable names.
-```julia
-global_var_name = value
-```
-This is a glaring issue because other languages do not have this "feature" and are fine without it. Julia could be made simpler without a significant consequence by omitting this feature.
+looks like a variable declaration. This could be confusing and decreases readability if you do not know what it is. Other languages do not have this "feature" and are fine without it. Julia could be made simpler without a significant consequence by omitting this feature.
 
 #### Mutable structs
 
