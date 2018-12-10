@@ -1,3 +1,7 @@
+
+println(string(1))
+println(string(3.564))
+
 max_val(var::Int32) = 2^31 -1
 
 max_val(var::Int16) = 2^15-1

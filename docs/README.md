@@ -3,6 +3,110 @@ An exploration of the Julia programming language for CSCI 355
 
 [Full Proposal](https://drive.google.com/open?id=1zAACVJXP2G_ECGt8eHKT_1zGMPDgzC5JwPi9xr1OOBM)
 
+[Final Presentation](https://drive.google.com/open?id=17BncfvbCnx1tWT6wZLClORXZzMAlNDgpsIZt8X_L8bs)
+
+# Main attributes
+
+## Static or Dynamic compliation?
+
+Julia is an interpreted language: compiled then run around the same time.
+
+### Compilation exceptions
+
+Julia code can be embedded in C code, linked to the julia library, and compiled with gcc. In addition, there is a Julia package called PackageCompiler that helps automate this process. However, when I tried this (on Windows with the mingw-w64 port of gcc), a simple hello world program program was over one hundred megabytes in size. Compilation also takes an unusually long amount of time.
+
+## Pass by Value?
+
+Julia is pass by value as long as you are passing in a single primitive. values inside arrays and structs can be mutated, but structs and arrays cannot be reassigned to the input parameter. It is most similar to Java's pass by a copy of an object's reference.
+
+A quick example:
+```julia
+mutable struct uct
+    var
+end
+
+function test(var)
+    var = 3
+    return
+end
+
+function uctTest(input::uct)
+    input.var = 3
+    return
+end
+
+test_uct = uct(4)
+println("Before uctTest $(test_uct.var)")
+
+uctTest(test_uct)
+println("After uctTest $(test_uct.var)")
+
+input_arg = 42
+println("Before test $input_arg")
+
+test(input_arg)
+println("After test $input_arg")
+```
+That code outputs:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/passByRef.png)
+
+## Type checking 
+
+Julia checks types at runtime. It can use the argument's types to determine which function should be called.
+
+```julia
+function f(x::Int,y::Int)
+    # do integer stuff
+end
+
+function f(x,y)
+    # do stuff
+end
+```
+
+In this example the first version of the function `f` will be called if the arguments are integers, and the second function will be called if the arguments are not an integer or an integer subtype, like a bool type.
+
+## Exception handling
+
+Julia has a lot of builtin exceptions. Some examples follow:
+
+```julia
+ArgumentError
+DomainError
+OverflowError
+BoundsError
+OutOfMemoryError
+```
+
+Exceptions can be defined as such:
+```julia
+struct SpecialException <: Exception end
+```
+
+Exceptions  are triggered by using the `throw` keyword:
+```julia
+throw(OutOfMemoryError())
+```
+
+Julia uses try catch and finally blocks to handle exceptions:
+```julia
+try
+    # try to do something
+
+catch
+    # do if an exception occurs
+
+finally
+    # this executes whether or
+    # not an exception occurres
+end
+```
+
+## Memory management
+
+Memory is automatically managed, like most scripting languages.
+
 ## The Julia paradigm
 
 Julia is not an OO language. It does not support objects per say. However, there are some leftover traits from OO programming. The main evidence of this is the subtyping feature.
@@ -71,7 +175,33 @@ Running that yields this result:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subSuperType.PNG)
 
-Here is a better demonstrator of the usefulness of mutiple dispatch. Say if you needed to process one datatype differently than another. Multiple dispatch will dispatch the function with the matching argument without having to rename a function or bind it to a unique object (like Java's String.parseInt).
+#### Why Multiple Dispatch? (Why no objects?)
+
+The main reasons I have found are simplicity and ease of extending existing code.
+
+The most common example of this is implementing functions that could, in an object-oriented language, be bound to two different objects. 
+
+One possible situation that exemplifies this is simulating a person starting a car.
+
+In Julia that function could look like this.
+```julia
+function startCar(input_person::Person, input_car::Car)
+    start(input_car)
+end
+```
+
+Following an object oriented programming style, Java in this case, would have a function prototype like this
+```java
+public class Person {
+
+    void startCar(Car input_car){
+        input_car.start();
+    }
+}
+```
+
+While that may look all well and good, 
+
 
 ```julia
 max_val(var::Int32) = 2^31 -1
