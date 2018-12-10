@@ -13,7 +13,7 @@ Julia is an interpreted language: compiled then run around the same time.
 
 ### Compilation exceptions
 
-Julia code can be embedded in C code, linked to the julia library, and compiled with gcc. In addition, there is a Julia package called PackageCompiler that helps automate this process. However, when I tried this (on Windows with the mingw-w64 port of gcc), a simple hello world program program was over one hundred megabytes in size. Compilation also takes an unusually long amount of time.
+Julia code can be embedded in C code, linked to the julia library, and compiled with gcc. In addition, there is a Julia package called PackageCompiler that helps automate this process. However, when I tried this (on Windows with the mingw-w64 port of gcc), a simple hello world program program was over one hundred megabytes in size. Compilation also takes an unusually long time.
 
 ## Pass by Value?
 
