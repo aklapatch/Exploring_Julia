@@ -1,4 +1,4 @@
-mutable struct uct
+mutable struct TestType
     var
 end
 
@@ -7,17 +7,19 @@ function test(var)
     return
 end
 
-function uctTest(input::uct)
+function structTest(input::TestType)
     input.var = 3
     return
 end
 
-test_uct = uct(4)
-println("Before uctTest $(test_uct.var)")
-uctTest(test_uct)
-println("After uctTest $(test_uct.var)")
+test_struct = TestType(4)
+println("Before structTest $(test_struct.var)")
+
+structTest(test_struct)
+println("After structTest $(test_struct.var)")
 
 input_arg = 42
 println("Before test $input_arg")
+
 test(input_arg)
 println("After test $input_arg")

@@ -21,7 +21,7 @@ Julia is pass by value as long as you are passing in a single primitive. values 
 
 A quick example:
 ```julia
-mutable struct uct
+mutable struct TestType
     var
 end
 
@@ -30,21 +30,21 @@ function test(var)
     return
 end
 
-function uctTest(input::uct)
+function structTest(input::TestType)
     input.var = 3
     return
 end
+# init member variable to 4
+test_struct = TestType(4)
+println("Before structTest $(test_struct.var)")
 
-test_uct = uct(4)
-println("Before uctTest $(test_uct.var)")
-
-uctTest(test_uct)
-println("After uctTest $(test_uct.var)")
+structTest(test_struct) # alter test_struct.var
+println("After structTest $(test_struct.var)")
 
 input_arg = 42
 println("Before test $input_arg")
 
-test(input_arg)
+test(input_arg) # this will not change input_arg
 println("After test $input_arg")
 ```
 That code outputs:
@@ -65,12 +65,11 @@ function f(x,y)
 end
 ```
 
-In this example the first version of the function `f` will be called if the arguments are integers, and the second function will be called if the arguments are not an integer or an integer subtype.
+In this example the first version of the function `f` will be called if the arguments are integers, and the second function will be called if the arguments are not an integer or an integer subtype. Specifying argument types should be done where possible to increase performance.
 
 ## Exception handling
 
-Julia has a lot of builtin exceptions. Some examples follow:
-
+Julia has a lot of builtin exceptions. Some examples of those exceptions follow:
 ```julia
 ArgumentError
 DomainError
@@ -79,7 +78,7 @@ BoundsError
 OutOfMemoryError
 ```
 
-Exceptions can be defined as such:
+Exceptions can be declared and defined as such:
 ```julia
 struct SpecialException <: Exception end
 ```
@@ -108,115 +107,7 @@ end
 
 Memory is  managed automatically, like most scripting languages.
 
-# The Julia paradigm
-
-Julia is not an object oriented programming language. However, there are some leftover traits from the object oriented programming paradigm. The main evidence of this is Julia's subtyping and abstraction.
-
-Julia's abstraction takes place through abstract types. For example:
-```julia
-abstract type Language end
-
-struct English <: Language end
-
-struct Spanish <: Language end
-```
-
-Now any function with
-
-One can declare a subtype of a primitive like this:
-
-```julia
-primitive type Bool <: Integer 8 end
-```
-
-Julia also allows subtyping checks to evaluate to Bool values.
-
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
-
-### Subtyping applied
-
-Julia can uses this subtyping concept in its equivalent of C++ templates.
-
-```julia
-struct Vehicle{T}
-    Type::T
-    weight::Float64
-    engine::String
-    gun::String
-end
-```
-One can check the subtyping of this struct as such:
-
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subtypeStruct.PNG)
-
-Julia uses multiple dispatch, so it does not consider any concrete type to be a subtype of another concrete type.
-
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/concreteSubtypes.PNG)
-
-Even though:
-
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/FloatSubtype.PNG)
-
-### Multiple Dispatch
-
-In few words, multiple dispatch is runtime function overloading.
-
-In more words, it selects a function at runtime based on the types of the arguments. If you specify a an argument as a supertype, it will accept all subtypes of that supertype.
-
-```julia
-function test(y::Real)
-    if (y>20)
-        return 1
-    else
-        return 0
-    end
-end
-
-function main()
-    t::Float32 = 34.34234
-    x::Float64 = 34.34234
-    
-    println("val= ",test(t))
-    println("val= ",test(x))
-end
-
-main()
-```
-
-Running that yields this result:
-
-![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subSuperType.PNG)
-
-#### Why Multiple Dispatch? (Why no objects?)
-
-The main reasons I have found are simplicity and ease of extending existing code.
-
-The most common example of this is implementing functions that could, in an object-oriented language, be bound to two different objects. 
-
-One possible situation that exemplifies this is simulating a person starting a car.
-
-In Julia that function could look like this:
-```julia
-function startCar(input_person::Person, input_car::Car)
-    start!(input_car)
-end
-```
-
-Following an object oriented programming style, Java in this case, would have a function prototype like this
-
-```java
-public class Person {
-
-    void startCar(Car input_car){
-        input_car.start();
-    }
-}
-```
-In Julia, functions cannot not bound to an object like Java or C++. The main disadvantage of that is the lack of access control (e.g. public and private functions) and inheritance. 
-
-Multiple dispatch makes up for the inheritance deficiency by allowing the user to redefine fuctions with abstract arguments for more concrete types. This approach is simpler than object oriented programming since it does not have the additional behavior of objects stacked on top of structs and methods.
- 
-## Language features
+# Julia's features
 
 + Package manager
 
@@ -268,7 +159,111 @@ end
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/MatFunc.png)
 
-## Train of thought
+# The Julia paradigm
+
+Julia is not an object oriented programming language. However, there are some leftover traits from the object oriented programming paradigm. Those leftovers are Julia's subtyping and abstraction.
+
+Julia's abstraction takes place through abstract types. For example:
+```julia
+abstract type Language end
+
+struct English <: Language end
+
+struct Spanish <: Language end
+```
+Now `English` and `Spanish` are subtypes of Languages and both of them can used in functions with the `Language` abstract type.
+
+One could even make subtypes of a primtive. You can declare a subtype of a primitive like this:
+
+```julia
+primitive type Bool <: Integer 8 end
+```
+
+Julia also allows subtyping checks to evaluate to Bool values.
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/evalSubtype.PNG)
+
+## Subtyping applied
+
+Julia can uses this subtyping concept in its equivalent of C++ templates.
+
+```julia
+struct Vehicle{T}
+    Type::T
+    weight::Float64
+    engine::String
+    gun::String
+end
+```
+One can check the subtyping of this struct as such:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subtypeStruct.PNG)
+
+Julia uses multiple dispatch, so it does not consider any concrete type to be a subtype of another concrete type.
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/concreteSubtypes.PNG)
+
+Even though:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/FloatSubtype.PNG)
+
+## Multiple Dispatch
+
+In few words, multiple dispatch is runtime function overloading.
+
+In more words, it selects a function at runtime based on the types of the arguments. If the argument is a supertype or abstract type, it will accept all subtypes of that supertype.
+```julia
+function test(y::Real)
+    if (y>20)
+        return 1
+    else
+        return 0
+    end
+end
+
+function main()
+    t::Float32 = 34.34234
+    x::Float64 = 34.34234
+    
+    println("val= ",test(t))
+    println("val= ",test(x))
+end
+
+main()
+```
+
+Running that yields this result:
+
+![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/subSuperType.PNG)
+
+### Why Multiple Dispatch? (Why no objects?)
+
+The main reasons I have found are simplicity and ease of extending existing code.
+
+The most common example of this is implementing functions that could, in an object-oriented language, be bound to two different objects. 
+
+One possible situation that exemplifies this is simulating a person starting a car. In Julia that function could look like this:
+```julia
+function startCar(input_person::Person, input_car::Car)
+    start!(input_car)
+end
+```
+
+Following an object oriented programming style, Java in this case, would have a function prototype like this
+
+```java
+public class Person {
+
+    void startCar(Car input_car){
+        input_car.start();
+    }
+}
+```
+In Julia, functions cannot not bound to an object like Java or C++. The main disadvantage of that is the lack of access control (e.g. public and private functions) and the lack of inheritance. 
+
+Multiple dispatch makes up for the inheritance deficiency by allowing the user to redefine fuctions with abstract arguments for more concrete types. This approach is simpler than object oriented programming since it does not have the additional behavior of objects stacked on top of structs and methods.
+
+# What I noticed
 
 Julia's heritage of other languages leads to a interesting side effect. Juila exemplifies Perl's "There is more than one way to do it." mentality. This effect results from Julia's varing syntaxes that were imported from other programming languages. One example of this is declaring a function.
 
@@ -293,9 +288,9 @@ end
 ```julia
 function abs(x); (x^2)^(1/2); end
 ```
-## Gripes and Nitpicks
+# Gripes and Nitpicks
 
-### Incomplete support
+## Incomplete support
 
 The language does not universally support all of its features across all cases or scenarios.
 
@@ -309,9 +304,7 @@ This results in:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/typingGlobalVars.png)
 
-### "Features"
-
-#### Scope specification
+## Scope specification
 
 The scope in julia has a unique mechanic involved in it. This design choice can be good for clarity, but it only if you know what it means. Here is an example.
 
@@ -336,13 +329,11 @@ If you omitted that `global bestfit` statement, you would encounter this error:
 
 ![alt text](https://raw.githubusercontent.com/aklapatch/explore-julia/master/images/juliaGlobalError.png)
 
-To access the global variables you declared earlier, you need to specify that they want to access that variable. The problem is that that the scope specification, this statement:
-```julia
-global bestfit
-``` 
+To access the global variables you declared earlier, you need to specify that they want to access that variable. The problem is that that the scope specification, the statement
+```global bestfit``` 
 looks like a variable declaration. This could be confusing and decreases readability if you do not know what it is. Other languages do not have this "feature" and are fine without it. Julia could be made simpler without a significant consequence by omitting this feature.
 
-#### Mutable structs
+## Breaking conventions
 
 This how you declare an immutable struct:
 ```julia
@@ -356,7 +347,7 @@ end
 This is how you declare a mutable struct:
 ```julia
 mutable struct person
-    age::Int8
+    age::UInt8
     beliefs::String
 end
 ```
