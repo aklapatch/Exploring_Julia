@@ -5,6 +5,8 @@ An exploration of the Julia programming language for CSCI 355
 
 [Final Presentation](https://drive.google.com/open?id=17BncfvbCnx1tWT6wZLClORXZzMAlNDgpsIZt8X_L8bs)
 
+[Project Write-up](https://docs.google.com/document/d/1DQdELPY33zyayicWmCtFo2XAdVDMDXKp6u7nW7iThLk/edit?usp=sharing)
+
 # Main attributes
 
 ## Static or Dynamic compliation?
